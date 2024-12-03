@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Good Day - Nosotros</title>
+    <!-- Styles -->
+    <link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/mobile.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/footer.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://kit.fontawesome.com/a3d0c3f06e.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    <header id="header">
+
+     <!-- Navegation Menu -->
+     <nav class="menu">
+         <div class="logobox">
+             <h1 class="logo"><a href="#">  
+              <img src="images/logo_farmacia.png" alt="">
+                MI AHORRO PHARMA
+             </a></h1>
+          
+         </div>
+
+         <div class="list-container">
+             <ul class="lists">
+                 <li><a th:href="@{/inicio}">Inicio</a></li>
+                 <li><a th:href="@{/catalogo}">Catalogo</a></li>
+                 <li><a th:href="@{/nosotros}" class="active">Nosotros</a></li>
+                 <li><a href="#footer-section">Contacto</a></li>
+                 
+                 <li class="nav-item dropdown" th:if="${nombre}">
+                  <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span>Bienvenido(a) [[${nombre}]] [[${apellido}]]</span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a th:href="@{/logout}" class="btn">Cerrar Sesión</a></li>
+                  </ul>
+                </li>
+        
+                 <li th:unless="${nombre}">
+                     <a th:href="@{/login}">Inicia Sesion</a>
+                 </li>
+                 <span class="btn-compra"><i class="fa-solid fa-cart-shopping"></i></span>
+             </ul>
+         </div>
+     </nav>
+
+     <!-- Img Header -->
+     <figure class="img-header">
+         <div class="welcome">
+            
+            <h4>"¡Tu salud es nuestra prioridad!"</h4>
+            <h2><a href="#">
+              <i class="fa-solid fa-house-medical"></i>
+                Mi Ahorro Pharma
+            </a></h2>
+         </div>
+     </figure>
+
+    </header>
+
+<main>
+
+    <!-- About Us -->
+    <section class="about-us">
+        <div class="info">
+            <h3>Acerca de nosotros</h3>
+            <p>Bienvenidos a "Mi Ahorro Pharma", donde cuidamos de tu salud y bienestar. Con años de experiencia en el sector, nuestro equipo de profesionales
+              farmacéuticos está comprometido a ofrecerte un servicio de calidad y atención personalizada. Creemos en la importancia de la ética y la transparencia en cada interacción. Nos esforzamos por
+              garantizar que todos nuestros productos sean seguros y efectivos, proporcionando asesoramiento claro y accesible.</p>
+            <hr>
+        </div>
+
+        <div class="free-content">
+            <div class="icons">
+                <div>
+                   <div class="span-icon"><span><i class="fas fa-users"></i></span></div>
+                   <h6>Valores</h6>
+                   <p>Una farmacia debe priorizar la ética, la calidad, el compromiso con la salud, la accesibilidad, el respeto y la educación,
+                    asegurando atención integral y responsable para el bienestar de la comunidad.</p>
+                </div>
+
+                <div>
+                    <div class="span-icon"><span><i class="bi bi-bullseye"></i></span></div>
+                    <h6>Misión</h6>
+                    <p>Ofrecer a nuestros clientes servicios farmacéuticos de buena calidad, forma profesional, servicial y cercana.
+                       Proporcionar medicamentos seguros y efectivos para convertirnos en un modelo de confianza en el ámbito de salud.
+                    </p>
+                 </div>
+
+                 <div>
+                    <div class="span-icon"><span><i class="fas fa-chart-line"></i></span></div>
+                    <h6>Visión</h6>
+                    <p>Ser reconocida por nuestro compromiso con la salud y el bienestar de la comunidad, ofreciendo una amplia variedad
+                      de servicios farmacéuticos innovadores y personalizados. </p>
+                 </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery-section">
+        <div class="animal-icon">
+          <i class="fa-solid fa-suitcase-medical"></i>
+        </div>
+
+        <div class="gallery-content">
+            <div class="img-card"><img src="images/img_1.jpeg" alt="Mi Ahorro Pharma"></div>
+            <div class="img-card"><img src="images/img_2.jpeg" alt="Mi Ahorro Pharma"></div>
+            <div class="img-card"><img src="images/img_3.jpeg" alt="Mi Ahorro Pharma"></div>
+            <div class="img-card"><img src="images/img_4.jpg" alt="Mi Ahorro Pharma"></div>
+            <div class="img-card"><img src="images/img_5.jpg" alt="Mi Ahorro Pharma"></div>
+            <div class="img-card"><img src="images/img_6.jpeg" alt="Mi Ahorro Pharma"></div>
+            <div class="img-card"><img src="images/img_7.jpeg" alt="Mi Ahorro Pharma"></div>
+            <div class="img-card"><img src="images/img_8.jpg" alt="Mi Ahorro Pharma"></div>
+
+        </div>
+
+        <!-- Modal -->
+         <div class="modal">
+             <span id="closeModal"><i class="fas fa-times"></i></span>
+             <img id="imgModal">
+             <p id="caption"></p>
+         </div>
+
+    </section>
+
+          <!--Footer-->
+  <div class="containers containers-footer" id="footer-section">
+
+    <footer class="text-dark text-center text-lg-start">
+      <!-- Grid container -->
+      <div class="container p-4">
+        <!--Grid row-->
+        <div class="row mt-4">
+          <!--Grid column-->
+          <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+            <h5 class="text-uppercase mb-4"><b>Bienvenidos a "Mi Ahorro Pharma"</b></h5>
+
+            <img src="images/logo_farmacia.png" alt="">
+            <p>
+
+            </p>
+
+
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase mb-4 pb-1"><b>Contacto</b></h5>
+
+
+            <ul class="fa-ul" style="margin-left: 1.65em;">
+              <li class="mb-3">
+                <span class="fa-li"><i class="fa-solid fa-location-dot"></i></span><span class="ms-2">Av. Los Pinos 23, Puente Piedra</span>
+              </li><br>
+              <li class="mb-3">
+                <span class="fa-li"><i class="fa-solid fa-envelope-circle-check"></i></span><span class="ms-2">miahorropharma@gmail.com</span>
+              </li><br>
+              <li class="mb-3">
+                <span class="fa-li"><i class="fa-solid fa-phone"></i></span><span class="ms-2">+51 950 126 523</span>
+              </li><br>
+              <li class="mb-3">
+                <span class="fa-li"><i class="fa-solid fa-users"></i></span><span class="ms-2">GRUPO 4</span>
+              </li>
+            </ul>
+
+
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase mb-4"><b>Horario de Atención</b></h5>
+
+            <table class="table text-center text-white">
+              <tbody class="fw-normal">
+                <tr>
+                  <td>Lun - Juev:</td>
+                  <td>10am - 10pm</td>
+                </tr>
+                <tr>
+                  <td>Vie - Sab:</td>
+                  <td>10am - 11pm</td>
+                </tr>
+                <tr>
+                  <td>Domingo:</td>
+                  <td>11am - 6pm</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><br></p>
+            <div class="buttons">
+                <!-- Facebook -->
+                <a type="button" href="https://www.facebook.com/?locale=es_LA"><i class="fa brands fa-facebook"></i></a>
+                <!-- Instagram -->
+                <a type="button" href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+                <!-- Twitter -->
+                <a type="button" href="https://twitter.com/i/flow/login?redirect_after_login=%2Fhome"><i class="fa-brands fa-twitter"></i></a>
+                <!-- Google + -->
+
+              </div>
+
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </div>
+      <!-- Grid container -->
+
+
+      <div class="text-center p-3" style="background-color: rgba(37, 33, 33, 0.379);">
+        © 2024: Reservados todos los derechos de autor.
+      </div>
+    </footer>
+
+
+</main>
+
+<!-- Scripts -->
+<script src="https://kit.fontawesome.com/35db202371.js" crossorigin="anonymous"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

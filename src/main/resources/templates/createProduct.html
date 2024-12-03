@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<!-- Menú de navegación -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/empleado/lista}">Control de Empleados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/producto/lista}">Control de Productos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/lote/lista}">Control de Lotes</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center mb-0">Registro de Productos</h2>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/producto/registrar}" th:object="${producto}" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="nombreProducto" class="form-label">Nombre del Producto</label>
+                            <input type="text" id="nombreProducto" name="nombreProducto" th:field="*{nombreProducto}" class="form-control" placeholder="Ingrese el nombre del producto" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="categoriaId" class="form-label">Categoría</label>
+                            <select id="categoriaId" name="CategoriaId" th:field="*{categoriaId}" class="form-select" required>
+                                <option value="" disabled selected>Seleccione una categoría</option>
+                                <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}">Categoría</option>
+                            </select>
+                        </div>
+
+                        <!-- Botones para gestionar categorías -->
+                        <div class="mb-3 d-flex justify-content-between">
+                            <a class="btn btn-primary" th:href="@{/categoria/registrar}">Crear Categoría</a>
+                            <a class="btn btn-secondary" th:href="@{/categoria/lista}">Administrar Categorías</a>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="precioVenta" class="form-label">Precio de Venta</label>
+                            <input type="number" id="precioVenta" name="PrecioVenta" th:field="*{precioVenta}" class="form-control" step="0.01" placeholder="Ingrese el precio de venta" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="principioActivo" class="form-label">Principio Activo</label>
+                            <input type="text" id="principioActivo" name="PrincipioActivo" th:field="*{principioActivo}" class="form-control" placeholder="Ingrese el principio activo" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="presentacion" class="form-label">Presentación</label>
+                            <input type="text" id="presentacion" name="Presentacion" th:field="*{precentacion}" class="form-control" placeholder="Ingrese la presentación" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="laboratorio" class="form-label">Laboratorio</label>
+                            <input type="text" id="laboratorio" name="Laboratorio" th:field="*{laboratorio}" class="form-control" placeholder="Ingrese el laboratorio" required>
+                        </div>
+
+<!--                        <div class="mb-3">-->
+<!--                            <label for="lote" class="form-label">Lote</label>-->
+<!--                            <input type="number" id="lote" name="Lote" th:field="*{lote}" class="form-control" maxlength="5" placeholder="Ingrese el lote (5 números)" required>-->
+<!--                        </div>-->
+
+                        <div class="mb-3">
+                            <label for="loteId" class="form-label">Lote</label>
+                            <select id="loteId" name="loteId" th:field="*{loteId}" class="form-select" required>
+                                <option value="" disabled selected>Seleccione una lote</option>
+                                <option th:each="lote : ${lotes}" th:value="${lote.id}" th:text="${lote.loteCompleto}">Categoría</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento</label>
+                            <input type="date" id="fechaVencimiento" name="fechaVencimiento" th:field="*{fechaVencimiento}" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="foto" class="form-label">Imagen</label>
+                            <input type="file" id="foto" name="file" class="form-control" required>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

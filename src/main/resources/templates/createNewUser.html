@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+      <html xmlns:th="http://www.thymeleaf.org">
+
+      <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Registro</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/login.css" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <form th:action="@{/cliente/nuevo}" method="post" th:object="${cliente}">
+    <h1>¡Bienvenido!</h1>
+    <hr>
+    <div class="msError" th:if="${msError}">
+      <p th:text="${msError}"></p>
+    </div>
+
+    <p>Ingresa tus datos para registrarte</p>
+
+    <div class="input-box">
+      <label for="nombres">Nombres:</label>
+      <input type="text" id="nombres" placeholder="Ingresa tu nombre" th:field="*{nombre}" th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid'" />
+      <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+    </div>
+
+    <div class="input-box">
+      <label for="apellidos">Apellidos:</label>
+      <input type="text" id="apellidos" placeholder="Ingresa tus apellidos" th:field="*{apellido}" th:classappend="${#fields.hasErrors('apellido')} ? 'is-invalid'" />
+      <div class="error" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+    </div>
+
+    <div class="input-box">
+      <label for="dni">DNI:</label>
+      <input type="text" id="dni" placeholder="Ingresa tu DNI" th:field="*{dni}" th:classappend="${#fields.hasErrors('dni')} ? 'is-invalid'" />
+      <div class="error" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div>
+    </div>
+
+    <div class="input-box">
+      <label for="telefono">Teléfono:</label>
+      <input type="text" id="telefono" placeholder="Ingresa tu teléfono" required
+             th:field="*{telefono}"
+             th:class="${#fields.hasErrors('telefono')} ? 'error-input' : ''" />
+      <h5>Recuerda: 7 dígitos para teléfono fijo o 9 para celular</h5>
+      <div class="error" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+    </div>
+
+    <div class="input-box">
+      <label for="direccion">Dirección:</label>
+      <input type="text" id="direccion" placeholder="Ingresa tu direccion" th:field="*{direccion}" th:classappend="${#fields.hasErrors('direccion')} ? 'is-invalid'" />
+      <div class="error" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></div>
+    </div>
+
+    <div class="input-box">
+      <label for="email">Correo:</label>
+      <input type="text" id="email" placeholder="Ingresa tu email" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'" />
+      <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+    </div>
+
+    <div class="input-box">
+      <label for="clave">Contraseña:</label>
+      <input type="password" id="clave" placeholder="Ingresa la contraseña" th:field="*{password}" th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'" />
+      <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    </div>
+
+    <button class="btn-login" type="submit" value="Registrar" name="btnRegistrar">Registrar</button>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+nav.menu {
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave debajo del menú */
+}
+
+/* Si quieres agregar más margen en la parte inferior, puedes usar esto */
+nav.menu {
+    margin-bottom: 10px;
+}

@@ -1,0 +1,71 @@
+@media only screen and (max-width:804px) {
+    
+    /** Navegation Menu **/
+    .logobox img {
+        max-width: 100%;  /* Asegura que la imagen no se desborde del contenedor */
+        height: auto;     /* Mantiene la proporción de la imagen */
+        display: block;   /* Evita espacios adicionales debajo de la imagen */
+    }
+    .logobox img {
+        width: 150px;    /* Ajusta el ancho deseado */
+        height: 100px;   /* Ajusta la altura deseada */
+    }
+    .logobox {
+        text-align: center; /* Centra el contenido dentro del contenedor */
+    }
+
+    .menu .list-container{
+        position: absolute;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background: #fff;
+        border-top: 1px solid #000;
+    }
+    .menu .list-container .lists{
+        display: block;
+        width: 90%;
+        margin:50px auto;
+    }
+    .menu .list-container .lists li{
+        display: flex;
+        justify-content: center;
+        border-bottom: 2px solid #000000;
+    }
+    .menu .list-container .lists li a{
+        margin:5px 0px;
+    }
+
+    /** Img Header **/
+    .img-header .welcome{
+        width: 80%;
+        margin:auto;
+    }
+    .img-header .welcome h4{
+        font-size: 30px;
+        line-height: 50px;
+    }
+    .img-header .welcome > h2 a{
+        font-size: 40px;
+    }
+
+    /** About Us **/
+    .about-us .info h3{font-size: 35px;}
+    .about-us .info p{font-size: 18px;}
+
+    /** Gallery **/
+    .gallery-content{
+        grid-template-columns: repeat(1,1fr);
+        grid-template-rows: repeat(12, 350px);
+        grid-gap: 20px;
+    }
+
+    /** Modal **/
+    .modal #imgModal{
+        width: 95%;
+        height: 55%;
+    }
+    
+
+}
