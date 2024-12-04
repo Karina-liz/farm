@@ -38,6 +38,7 @@ public class ProductoDto {
     public static class Response {
         private Long id;
         private CategoriaDto.Response categoria;
+        private String nombreProducto;
         private BigDecimal precioCompra;
         private BigDecimal precioVenta;
         private String principioActivo;
@@ -50,6 +51,7 @@ public class ProductoDto {
         public Response(Producto data) {
             this.id = data.getId();
             this.categoria = new CategoriaDto.Response(data.getCategoria());
+            this.nombreProducto = data.getNombreProducto();
             this.precioCompra = data.getPrecioCompra();
             this.precioVenta = data.getPrecioVenta();
             this.principioActivo = data.getPrincipioActivo();

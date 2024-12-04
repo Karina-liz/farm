@@ -28,7 +28,6 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/producto")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
@@ -36,7 +35,7 @@ public class ProductController {
     private final CategoryService categoryService;
     private final LotService lotService;
 
-    @GetMapping("/lista")
+    @GetMapping("/producto/lista")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String listProduct(@RequestParam(required = false, defaultValue = "0") Integer index,
                               @RequestParam(required = false, defaultValue = "10") Integer size,
@@ -63,7 +62,7 @@ public class ProductController {
         return "products";
     }
 
-    @GetMapping("/registrar")
+    @GetMapping("/producto/registrar")
     public String showFromRegistrar(Model model) {
         model.addAttribute("producto", new ProductoDto.Request());
 
@@ -80,7 +79,7 @@ public class ProductController {
         return "createProduct";
     }
 
-    @PostMapping("/registrar")
+    @PostMapping("/producto/registrar")
     public String register(@RequestPart MultipartFile file,
                            @Valid @ModelAttribute("producto") ProductoDto.Request request) throws IOException {
         productService.saveProduct(request, file);
@@ -88,7 +87,7 @@ public class ProductController {
         return "redirect:/producto/lista";
     }
 
-    @GetMapping("/editar/{id}")
+    @GetMapping("/producto/editar/{id}")
     public String showFromEdit(@PathVariable("id") Long id,
                                Model model) {
         model.addAttribute("producto", productService.findById(id));
@@ -99,7 +98,7 @@ public class ProductController {
         return "editProduct";
     }
 
-    @PostMapping("/editar/{id}")
+    @PostMapping("/producto/editar/{id}")
     public String update(@PathVariable("id") Long id,
                          @RequestPart MultipartFile file,
                          @Valid @ModelAttribute("producto") ProductoDto.Update update) throws IOException {
@@ -109,7 +108,7 @@ public class ProductController {
         return "redirect:/producto/lista";
     }
 
-    @GetMapping("/eliminar/{id}")
+    @GetMapping("/producto/eliminar/{id}")
     public String delete(@PathVariable("id") Long id) throws IOException {
         productService.deleteProduct(id);
 

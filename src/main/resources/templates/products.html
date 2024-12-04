@@ -53,7 +53,8 @@
                 <th>Precio de Venta</th>
                 <th>Principio Activo</th>
                 <th>Presentacion</th>
-                <th>Laboratorio</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -63,8 +64,11 @@
                 <td th:text="${producto.categoria.nombre}">Categoría</td>
                 <td th:text="${producto.precioVenta}">Precio de Venta</td>
                 <td th:text="${producto.principioActivo}">Principio Activo</td>
-                <td th:text="${producto.presentacion}">Presentacion</td>
-                <td th:text="${producto.laboratorio}">Laboratorio</td>
+                <td th:text="${producto.precentacion}">Presentacion</td>
+                <td> 
+                    <img th:src="@{/upload/{nombre}(nombre=${producto.foto})}" alt="Imagen del Producto" 
+                    style="width: 100px; height: auto;" />
+                </td>
                 <td>
                     <a th:href="@{/producto/editar/{id}(id=${producto.id})}" class="btn btn-info">Editar</a>
                     <a th:href="@{/producto/eliminar/{id}(id=${producto.id})}" class="btn btn-danger">Eliminar</a>

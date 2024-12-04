@@ -24,7 +24,7 @@
         <div class="logobox">
             <h1 class="logo">
                 <a href="#">
-                    <img src="img/logo farmacia.png" alt="Logo">
+                    <img src="images/logo_farmacia.png" alt="Logo">
                     MI AHORRO PHARMA
                 </a>
             </h1>
@@ -80,7 +80,7 @@
                         th:data-nombre="${producto.NombreProducto}"
                         th:data-precio="${producto.PrecioVenta}"
                         th:data-principio="${producto.PrincipioActivo}"
-                        th:data-presentacion="${producto.Presentacion}"
+                        th:data-presentacion="${producto.Precentacion}"
                         th:data-laboratorio="${producto.Laboratorio}">
                         <img th:src="@{/upload/{nombre}(nombre=${producto.Foto})}" alt="Imagen del Producto" class="card-img">
                         <div class="card-body">
