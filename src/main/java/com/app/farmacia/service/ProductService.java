@@ -1,6 +1,9 @@
 package com.app.farmacia.service;
 
 import com.app.farmacia.dto.ProductoDto;
+import com.app.farmacia.entity.Categoria;
+import com.app.farmacia.entity.Producto;
+
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,7 +15,7 @@ public interface ProductService {
 
     List<ProductoDto.Response> findByNombre(String nombreProducto);
 
-    List<ProductoDto.Response> findByCategoria(String categria);
+    List<ProductoDto.Response> buscarPorCategoria(String categoria);
 
     Page<ProductoDto.Response> listFilter(ProductoDto.FilterRequest request);
 
@@ -23,4 +26,6 @@ public interface ProductService {
     void updateProduct(Long id, ProductoDto.Update update, MultipartFile file) throws IOException;
 
     void deleteProduct(Long id);
+    
+    List<Categoria> listarCategorias();
 }

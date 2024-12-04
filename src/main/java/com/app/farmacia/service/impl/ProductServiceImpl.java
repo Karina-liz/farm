@@ -47,8 +47,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductoDto.Response> findByCategoria(String categria) {
-        List<Producto> productos = productoRepository.findByNombreProductoContainingIgnoreCase(categria);
+    public List<ProductoDto.Response> buscarPorCategoria(String categoria) {
+        List<Producto> productos = productoRepository.findByNombreProductoContainingIgnoreCase(categoria);
         if (CollectionUtils.isNotEmpty(productos)) {
             return new ProductoDto.Response().list(productos);
         }
@@ -116,5 +116,9 @@ public class ProductServiceImpl implements ProductService {
 
     private ProductoDto.Response convertToDto(Producto producto) {
         return new ProductoDto.Response(producto);
+    }
+
+    public List<Categoria> listarCategorias() {
+        return categoriaRepository.findAll();
     }
 }

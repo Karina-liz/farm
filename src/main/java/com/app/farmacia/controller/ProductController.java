@@ -3,13 +3,18 @@ package com.app.farmacia.controller;
 import com.app.farmacia.dto.CategoriaDto;
 import com.app.farmacia.dto.LoteDto;
 import com.app.farmacia.dto.ProductoDto;
+import com.app.farmacia.entity.Categoria;
+import com.app.farmacia.entity.Cliente;
 import com.app.farmacia.entity.Producto;
 import com.app.farmacia.entity.User;
+import com.app.farmacia.repository.CategoriaRepository;
 import com.app.farmacia.service.CategoryService;
 import com.app.farmacia.service.LotService;
 import com.app.farmacia.service.ProductService;
 import com.app.farmacia.service.UserService;
 import com.app.farmacia.util.Util;
+
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -25,13 +30,13 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
-    private final UserService userService;
     private final CategoryService categoryService;
     private final LotService lotService;
 
@@ -116,23 +121,39 @@ public class ProductController {
     }
 
     @GetMapping("/catalogo")
-    public String showCatalog(@AuthenticationPrincipal User user,
-                              @RequestParam(required = false) String nombre,
-                              @RequestParam(required = false) Long categoria,
-                              Model model) {
-        model.addAttribute("nombre", user.getNombre());
-        model.addAttribute("apellido", user.getApellido());
+public String mostrarCatalogo(
+        @RequestParam(required = false) String buscar,
+        @RequestParam(required = false) String categoria,
+        Model model,
+        @AuthenticationPrincipal User user) {
 
-        ProductoDto.FilterRequest request = new ProductoDto.FilterRequest();
-        request.setNombre(nombre);
-        request.setCategoria(categoria);
-
-        List<ProductoDto.Response> productos = productService.listFilterCustom(request);
-        model.addAttribute("productos", productos);
-
-        List<CategoriaDto.Response> categorias = categoryService.listAll();
-        model.addAttribute("categorias", categorias);
-
-        return "catalogo";
+    // Agregar información del usuario autenticado al modelo
+    if (user != null) {
+        model.addAttribute("nombreCliente", user.getNombre());
     }
+
+    // Filtrar productos por búsqueda y/o categoría
+    List<ProductoDto.Response> productos;
+    if (buscar != null && !buscar.trim().isEmpty() && categoria != null && !categoria.trim().isEmpty()) {
+        productos = productService.listFilterCustom(new ProductoDto.FilterRequest());
+    } else if (buscar != null && !buscar.trim().isEmpty()) {
+        productos = productService.findByNombre(buscar);
+    } else if (categoria != null && !categoria.trim().isEmpty()) {
+        productos = productService.buscarPorCategoria(categoria);
+    } else {
+        productos = productService.listFilterCustom(new ProductoDto.FilterRequest());
+    }
+
+    // Enviar los productos al modelo
+    model.addAttribute("productos", productos);
+
+    // Obtener las categorías disponibles
+    List<Categoria> categorias = productService.listarCategorias();
+    model.addAttribute("categorias", categorias);
+
+    // Devolver la vista del catálogo
+    return "catalogo";
+}
+
+
 }

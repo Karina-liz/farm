@@ -14,6 +14,7 @@ import java.util.List;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
     List<Producto> findByCategoria(Categoria categoria);
+    
 
     @Query("SELECT p FROM Producto p WHERE " +
             "LOWER(p.nombreProducto) LIKE LOWER(CONCAT('%', :nombreProducto, '%'))")
