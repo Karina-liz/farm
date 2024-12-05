@@ -1,5 +1,6 @@
 package com.app.farmacia.repository;
 
+import com.app.farmacia.dto.ProductoDto.Response;
 import com.app.farmacia.entity.Categoria;
 import com.app.farmacia.entity.Producto;
 import org.springframework.data.domain.Page;

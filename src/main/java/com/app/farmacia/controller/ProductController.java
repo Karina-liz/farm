@@ -4,17 +4,11 @@ import com.app.farmacia.dto.CategoriaDto;
 import com.app.farmacia.dto.LoteDto;
 import com.app.farmacia.dto.ProductoDto;
 import com.app.farmacia.entity.Categoria;
-import com.app.farmacia.entity.Cliente;
-import com.app.farmacia.entity.Producto;
 import com.app.farmacia.entity.User;
-import com.app.farmacia.repository.CategoriaRepository;
 import com.app.farmacia.service.CategoryService;
 import com.app.farmacia.service.LotService;
 import com.app.farmacia.service.ProductService;
-import com.app.farmacia.service.UserService;
 import com.app.farmacia.util.Util;
-
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -30,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -134,13 +127,23 @@ public String mostrarCatalogo(
 
     // Filtrar productos por búsqueda y/o categoría
     List<ProductoDto.Response> productos;
+    
+    // Si hay búsqueda y categoría, filtrar ambos
     if (buscar != null && !buscar.trim().isEmpty() && categoria != null && !categoria.trim().isEmpty()) {
+        // Llamar a un método que combine ambos filtros (búsqueda y categoría)
         productos = productService.listFilterCustom(new ProductoDto.FilterRequest());
-    } else if (buscar != null && !buscar.trim().isEmpty()) {
+    } 
+    // Si solo hay búsqueda
+    else if (buscar != null && !buscar.trim().isEmpty()) {
         productos = productService.findByNombre(buscar);
-    } else if (categoria != null && !categoria.trim().isEmpty()) {
-        productos = productService.buscarPorCategoria(categoria);
-    } else {
+    } 
+    // Si solo hay categoría
+    else if (categoria != null && !categoria.isEmpty()) {
+        // Si solo hay categoría, se filtra por categoría
+        productos = productService.buscarPorCategoria(categoria);  // Cambié este método para que filtre por categoría
+    } 
+    // Si no hay filtros, mostrar todos los productos
+    else {
         productos = productService.listFilterCustom(new ProductoDto.FilterRequest());
     }
 
@@ -154,6 +157,5 @@ public String mostrarCatalogo(
     // Devolver la vista del catálogo
     return "catalogo";
 }
-
 
 }

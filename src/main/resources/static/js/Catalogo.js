@@ -55,8 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
             actionUrl += '?' + params.join('&');
         }
 
-        // Redirigir a la URL con los parámetros actualizados
-        window.location.href = actionUrl;
+        // Si la URL ya es la misma, no redirigir
+        if (window.location.href !== actionUrl) {
+            window.location.href = actionUrl;
+        }
     }
 
     // Evento cuando se selecciona una categoría (filtro)
@@ -76,5 +78,11 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault(); // Prevenir el envío del formulario por defecto
             updateUrl(); // Actualiza la URL con el valor de búsqueda y categoría
         }
+    });
+
+    // Asegurarte de que el formulario no se envíe al presionar Enter
+    searchForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevenir envío del formulario
+        updateUrl(); // Actualiza la URL
     });
 });

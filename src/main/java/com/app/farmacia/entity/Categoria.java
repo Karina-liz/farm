@@ -1,7 +1,5 @@
 package com.app.farmacia.entity;
 
-import com.app.farmacia.dto.CategoriaDto;
-import com.app.farmacia.util.Util;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

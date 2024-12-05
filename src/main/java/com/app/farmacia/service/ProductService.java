@@ -2,7 +2,6 @@ package com.app.farmacia.service;
 
 import com.app.farmacia.dto.ProductoDto;
 import com.app.farmacia.entity.Categoria;
-import com.app.farmacia.entity.Producto;
 
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;

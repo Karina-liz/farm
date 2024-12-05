@@ -1,7 +1,6 @@
 package com.app.farmacia.service;
 
 import com.app.farmacia.dto.CategoriaDto;
-import com.app.farmacia.entity.Categoria;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
