@@ -28,6 +28,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
+@RequestMapping("/producto")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
@@ -35,7 +36,7 @@ public class ProductController {
     private final CategoryService categoryService;
     private final LotService lotService;
 
-    @GetMapping("/producto/lista")
+    @GetMapping("/lista")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String listProduct(@RequestParam(required = false, defaultValue = "0") Integer index,
                               @RequestParam(required = false, defaultValue = "10") Integer size,
@@ -62,7 +63,7 @@ public class ProductController {
         return "products";
     }
 
-    @GetMapping("/producto/registrar")
+    @GetMapping("/registrar")
     public String showFromRegistrar(Model model) {
         model.addAttribute("producto", new ProductoDto.Request());
 
@@ -79,7 +80,7 @@ public class ProductController {
         return "createProduct";
     }
 
-    @PostMapping("/producto/registrar")
+    @PostMapping("/registrar")
     public String register(@RequestPart MultipartFile file,
                            @Valid @ModelAttribute("producto") ProductoDto.Request request) throws IOException {
         productService.saveProduct(request, file);
@@ -87,18 +88,25 @@ public class ProductController {
         return "redirect:/producto/lista";
     }
 
-    @GetMapping("/producto/editar/{id}")
+    @GetMapping("/editar/{id}")
     public String showFromEdit(@PathVariable("id") Long id,
                                Model model) {
         model.addAttribute("producto", productService.findById(id));
 
         List<CategoriaDto.Response> categorias = categoryService.listAll();
-        model.addAttribute("categorias", categorias);
+        if (CollectionUtils.isNotEmpty(categorias)) {
+            model.addAttribute("categorias", categorias);
+        }
+
+        List<LoteDto.Response> loteList = lotService.listAll();
+        if (CollectionUtils.isNotEmpty(loteList)) {
+            model.addAttribute("lotes", loteList);
+        }
 
         return "editProduct";
     }
 
-    @PostMapping("/producto/editar/{id}")
+    @PostMapping("/editar/{id}")
     public String update(@PathVariable("id") Long id,
                          @RequestPart MultipartFile file,
                          @Valid @ModelAttribute("producto") ProductoDto.Update update) throws IOException {
@@ -108,31 +116,31 @@ public class ProductController {
         return "redirect:/producto/lista";
     }
 
-    @GetMapping("/producto/eliminar/{id}")
+    @GetMapping("/eliminar/{id}")
     public String delete(@PathVariable("id") Long id) throws IOException {
         productService.deleteProduct(id);
 
         return "redirect:/producto/lista";
     }
 
-    @GetMapping("/catalogo")
-    public String showCatalog(@AuthenticationPrincipal User user,
-                              @RequestParam(required = false) String nombre,
-                              @RequestParam(required = false) Long categoria,
-                              Model model) {
-        model.addAttribute("nombre", user.getNombre());
-        model.addAttribute("apellido", user.getApellido());
-
-        ProductoDto.FilterRequest request = new ProductoDto.FilterRequest();
-        request.setNombre(nombre);
-        request.setCategoria(categoria);
-
-        List<ProductoDto.Response> productos = productService.listFilterCustom(request);
-        model.addAttribute("productos", productos);
-
-        List<CategoriaDto.Response> categorias = categoryService.listAll();
-        model.addAttribute("categorias", categorias);
-
-        return "catalogo";
-    }
+//    @GetMapping("/catalogo")
+//    public String showCatalog(@AuthenticationPrincipal User user,
+//                              @RequestParam(required = false) String nombre,
+//                              @RequestParam(required = false) Long categoria,
+//                              Model model) {
+//        model.addAttribute("nombre", user.getNombre());
+//        model.addAttribute("apellido", user.getApellido());
+//
+//        ProductoDto.FilterRequest request = new ProductoDto.FilterRequest();
+//        request.setNombre(nombre);
+//        request.setCategoria(categoria);
+//
+//        List<ProductoDto.Response> productos = productService.listFilterCustom(request);
+//        model.addAttribute("productos", productos);
+//
+//        List<CategoriaDto.Response> categorias = categoryService.listAll();
+//        model.addAttribute("categorias", categorias);
+//
+//        return "catalogo";
+//    }
 }

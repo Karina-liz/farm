@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Mi Carrito de Compras</h2>
+    <div th:if="${#lists.isEmpty(carrito.items)}" class="alert alert-info">
+        Tu carrito está vacío
+    </div>
+    <div th:unless="${#lists.isEmpty(carrito.items)}" class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+                <tbody>
+            <tbody>
+            <tr th:each="item : ${carrito.items}">
+                <td th:text="${item.producto.nombreProducto}">Nombre</td>
+                <td th:text="${'S/. ' + item.producto.precioVenta}">Precio</td>
+                <td>
+                    <input type="number" class="form-control" style="width: 80px"
+                           th:value="${item.cantidad}" min="1"
+                           th:data-id="${item.producto.id}"
+                           onchange="actualizarCantidad(this)">
+                </td>
+                <td th:text="${'S/. ' + item.producto.precioVenta.multiply(item.cantidad)}">Subtotal</td>
+                <td>
+                    <form th:action="@{/carrito/eliminar}" method="post">
+                        <input type="hidden" name="productoId" th:value="${item.producto.id}">
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                <td th:text="${'S/. ' + carrito.total}"></td>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="d-flex justify-content-between mt-3">
+            <a href="/catalogo" class="btn btn-secondary">Seguir Comprando</a>
+            <form th:action="@{/carrito/checkout}" method="post">
+                <button type="submit" class="btn btn-primary">Procesar Pago</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

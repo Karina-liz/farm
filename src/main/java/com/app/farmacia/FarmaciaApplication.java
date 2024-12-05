@@ -32,7 +32,9 @@ public class FarmaciaApplication /*implements CommandLineRunner*/ {
 	@Autowired
 	LocalRepository localRepository;
 	@Autowired
-	LoteRepository loteRepository;*/
+	LoteRepository loteRepository;
+	@Autowired
+	PagoRepository pagoRepository;*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(FarmaciaApplication.class, args);
@@ -129,5 +131,26 @@ public class FarmaciaApplication /*implements CommandLineRunner*/ {
 //				.build();
 //
 //		loteRepository.save(lote2);
+
+//		Pago pago = Pago.builder()
+//				.estado("YAPE")
+//				.tipo("ONLINE")
+//				.build();
+//
+//		pagoRepository.save(pago);
+//
+//		Pago pago2 = Pago.builder()
+//				.estado("PLIN")
+//				.tipo("ONLINE")
+//				.build();
+//
+//		pagoRepository.save(pago2);
+//
+//		Pago pago3 = Pago.builder()
+//				.estado("EFECTIVO")
+//				.tipo("ONLINE")
+//				.build();
+//
+//		pagoRepository.save(pago3);
 	}*/
 }

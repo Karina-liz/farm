@@ -87,7 +87,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(UsuarioDto.Request request) {
         try {
-            User user = User.builder()
+            User findUser = userRepository.findByUsername(request.getUsername()).orElse(null);
+
+            if (findUser != null) {
+                throw new RuntimeException("Ya existe un usuario");
+            }
+
+            User newUser = User.builder()
                     .username(request.getUsername())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .nombre(request.getNombre())
@@ -105,13 +111,13 @@ public class UserServiceImpl implements UserService {
                 roles.add(role);
             });
 
-            user.setRoles(roles);
-            userRepository.save(user);
+            newUser.setRoles(roles);
+            userRepository.save(newUser);
 
             NotificacionDto.Request requestNotify = new NotificacionDto.Request();
             requestNotify.setNombre(request.getNombre());
             requestNotify.setApellido(request.getApellido());
-            requestNotify.setUsername(user.getUsername());
+            requestNotify.setUsername(newUser.getUsername());
             requestNotify.setPassword(request.getPassword());
 
             MessageDto messageDto = notificationService.notifyNewUser(requestNotify);

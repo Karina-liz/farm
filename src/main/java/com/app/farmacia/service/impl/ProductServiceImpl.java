@@ -30,8 +30,17 @@ public class ProductServiceImpl implements ProductService {
     private final UploadService uploadService;
 
     @Override
+    public Producto searchById(Long id) {
+        return productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+    }
+
+    @Override
     public ProductoDto.Response findById(Long id) {
-        return null;
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        return new ProductoDto.Response(producto);
     }
 
     @Override

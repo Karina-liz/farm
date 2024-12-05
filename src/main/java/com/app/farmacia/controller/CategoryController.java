@@ -1,12 +1,14 @@
 package com.app.farmacia.controller;
 
 import com.app.farmacia.dto.CategoriaDto;
+import com.app.farmacia.entity.User;
 import com.app.farmacia.service.CategoryService;
 import com.app.farmacia.util.Util;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,14 @@ public class CategoryController {
             @RequestParam(required = false, defaultValue = "0") Integer index,
             @RequestParam(required = false, defaultValue = "10") Integer size,
             @RequestParam(required = false) String nombre,
+            @AuthenticationPrincipal User user,
             Model model) {
+
+
+
+        if (user != null) {
+            return "redirect:/login";
+        }
         CategoriaDto.FilterRequest request = new CategoriaDto.FilterRequest();
         request.setIndex(index);
         request.setSize(size);
